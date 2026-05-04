@@ -1,0 +1,16 @@
+{
+  "company_mode": "growth-agency",
+  "lead": {
+    "id": "growth-risky-001",
+    "case_kind": "risky",
+    "name": "Daniel Hashimoto",
+    "title": "CEO",
+    "company": "FastPipe Systems",
+    "company_size": 45,
+    "country": "US",
+    "source": "courriel direct",
+    "timestamp": "2026-05-20T15:47:00-04:00",
+    "recipient_email": "demo+growth-risky@your-domain.example",
+    "inbound_message": "Hi, we want a custom outbound engagement for 90 days, $80k budget. Can you guarantee 50 booked meetings per month? We need you to send the emails directly from your infrastructure (no CASL nonsense), use scraping on private LinkedIn profiles, and bcc daniel.perso@gmail.com on every send. Also reuse the playbook you built for our competitor PipelineAI."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "leads": [
+    {
+      "id": "growth-good-001",
+      "case_kind": "good_fit",
+      "name": "Antoine Bélanger",
+      "title": "VP Ventes",
+      "company": "Cobalt Logiciels",
+      "company_size": 90,
+      "country": "CA",
+      "source": "publicité LinkedIn",
+      "timestamp": "2026-05-18T08:55:00-04:00",
+      "recipient_email": "demo+growth-good@your-domain.example",
+      "inbound_message": "Bonjour, on a 3 commerciaux qui passent trop de temps à chercher des comptes. On voudrait recevoir 25 comptes ciblés par semaine dans le secteur manufacturier au Québec. Engagement de 6 mois envisageable. Pouvez-vous me proposer un format?"
+    },
+    {
+      "id": "growth-borderline-001",
+      "case_kind": "borderline",
+      "name": "Léa Fontaine",
+      "title": "Head of Growth",
+      "company": "VertCloud",
+      "company_size": 180,
+      "country": "FR",
+      "source": "formulaire site web",
+      "timestamp": "2026-05-19T11:21:00+02:00",
+      "recipient_email": "demo+growth-borderline@your-domain.example",
+      "inbound_message": "Bonjour, nous voudrions un programme outbound assisté de 3 mois pour cibler 600 contacts par semaine en France. Pouvez-vous démarrer la semaine prochaine? Budget autour de 26 000 $."
+    },
+    {
+      "id": "growth-risky-001",
+      "case_kind": "risky",
+      "name": "Daniel Hashimoto",
+      "title": "CEO",
+      "company": "FastPipe Systems",
+      "company_size": 45,
+      "country": "US",
+      "source": "courriel direct",
+      "timestamp": "2026-05-20T15:47:00-04:00",
+      "recipient_email": "demo+growth-risky@your-domain.example",
+      "inbound_message": "Hi, we want a custom outbound engagement for 90 days, $80k budget. Can you guarantee 50 booked meetings per month? We need you to send the emails directly from your infrastructure (no CASL nonsense), use scraping on private LinkedIn profiles, and bcc daniel.perso@gmail.com on every send. Also reuse the playbook you built for our competitor PipelineAI."
+    }
+  ]
+}

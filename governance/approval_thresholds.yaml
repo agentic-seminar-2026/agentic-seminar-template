@@ -1,0 +1,16 @@
+# Seuils d'approbation — votre entreprise
+# Definissez quand une action necessite une approbation humaine.
+
+artifact_kind: approval_thresholds
+title: "Seuils d'approbation — [nom de votre entreprise]"
+
+thresholds:
+  - metric: "TODO: [ex: montant financier]"
+    agent_autonomous: "TODO: [ex: < 500$]"
+    supervisor_required: "TODO: [ex: 500$ - 5000$]"
+    director_required: "TODO: [ex: > 5000$]"
+
+  - metric: "TODO: [ex: nombre de destinataires courriel]"
+    agent_autonomous: "TODO: [ex: < 10]"
+    supervisor_required: "TODO: [ex: 10 - 50]"
+    director_required: "TODO: [ex: > 50]"

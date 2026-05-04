@@ -1,0 +1,48 @@
+{
+  "max_auto_approved_price": 35000,
+  "currency": "CAD",
+  "blocked_claim_types": [
+    "garantie de nombre de rendez-vous",
+    "garantie de revenu généré",
+    "promesse de contournement d'opt-out",
+    "promesse d'accès à des bases de données privées"
+  ],
+  "blocked_claim_patterns": [
+    "garantit",
+    "garanti",
+    "X rendez-vous garantis",
+    "contourner",
+    "scraping",
+    "base de données privée",
+    "sans CASL",
+    "sans RGPD"
+  ],
+  "blocked_actions": [
+    "auto_send_outbound_email",
+    "auto_send_to_unverified_recipient",
+    "send_without_human_review_above_threshold",
+    "scrape_private_profiles",
+    "purchase_opaque_data_lists",
+    "bypass_optout"
+  ],
+  "approval_required_for": [
+    "offers_above_max_auto_approved_price",
+    "discounts_above_7_pct",
+    "custom_engagements",
+    "campaigns_targeting_more_than_500_contacts_per_week"
+  ],
+  "privacy_rules": {
+    "no_personal_email_bcc": true,
+    "no_other_client_names_in_draft": true,
+    "no_private_profile_data": true,
+    "casl_compliant": true,
+    "gdpr_compliant": true
+  },
+  "escalation_reasons": [
+    "Le prix dépasse le seuil d'auto-approbation",
+    "Le brouillon contient une promesse de volume garanti",
+    "Le client demande de l'envoi automatique sortant",
+    "Le client demande du scraping ou contournement d'opt-out",
+    "Score de qualification trop faible avec demande à fort enjeu"
+  ]
+}

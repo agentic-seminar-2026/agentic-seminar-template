@@ -1,0 +1,33 @@
+# Local n8n fallback for the Founder → Agentic Enterprise demo.
+#
+# Use when n8n Cloud is unreachable, slow, or you want to demo offline.
+#
+#   docker compose -f docker-compose.local.yml up -d
+#   # open http://localhost:5678  → create owner account → Settings → API → create API key
+#   # paste key into .env as N8N_API_KEY and set:
+#   #   N8N_BASE_URL=http://localhost:5678/api/v1
+#   npm run push:workflow
+#
+# To stop:  docker compose -f docker-compose.local.yml down
+# Persistent state lives in the named volume `n8n_local_data`.
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: profos-n8n-local
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - N8N_SECURE_COOKIE=false
+      - GENERIC_TIMEZONE=America/Toronto
+      - N8N_DIAGNOSTICS_ENABLED=false
+    volumes:
+      - n8n_local_data:/home/node/.n8n
+
+volumes:
+  n8n_local_data:

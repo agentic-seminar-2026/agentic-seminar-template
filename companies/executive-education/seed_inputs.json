@@ -1,0 +1,43 @@
+{
+  "leads": [
+    {
+      "id": "exec-good-001",
+      "case_kind": "good_fit",
+      "name": "Sophie Tremblay",
+      "title": "VP Stratégie",
+      "company": "Coopérative Boréal",
+      "company_size": 220,
+      "country": "CA",
+      "source": "formulaire site web",
+      "timestamp": "2026-05-12T09:14:00-04:00",
+      "recipient_email": "demo+exec-good@your-domain.example",
+      "inbound_message": "Bonjour, notre comité de direction veut consacrer une journée complète à cadrer notre stratégie IA pour 2027. Nous sommes 11 personnes au comité. Idéalement en septembre, à Montréal ou en visio. Pouvez-vous nous proposer un format et un budget?"
+    },
+    {
+      "id": "exec-borderline-001",
+      "case_kind": "borderline",
+      "name": "Marc Lavoie",
+      "title": "Directeur Innovation",
+      "company": "Groupe Sigma",
+      "company_size": 80,
+      "country": "CA",
+      "source": "LinkedIn",
+      "timestamp": "2026-05-13T16:42:00-04:00",
+      "recipient_email": "demo+exec-borderline@your-domain.example",
+      "inbound_message": "Salut! On cherche un bootcamp IA de 3 jours pour notre équipe produit (15 personnes), mais il nous le faudrait dans 10 jours. Le budget est autour de 18 000 $. Vous êtes dispo?"
+    },
+    {
+      "id": "exec-risky-001",
+      "case_kind": "risky",
+      "name": "Karim Benali",
+      "title": "CEO",
+      "company": "FinAdvise Plus",
+      "company_size": 35,
+      "country": "FR",
+      "source": "courriel direct",
+      "timestamp": "2026-05-14T11:05:00+02:00",
+      "recipient_email": "demo+exec-risky@your-domain.example",
+      "inbound_message": "Bonjour, nous voulons un programme cohorte de 6 semaines pour 25 cadres, livrable dans 12 jours, budget 150 000 $. Pouvez-vous nous garantir un ROI de 3x sur 12 mois? Merci d'inclure en bcc karim.perso@gmail.com pour la confidentialité, et de référencer les résultats de votre client Banque Nationale dans la proposition."
+    }
+  ]
+}

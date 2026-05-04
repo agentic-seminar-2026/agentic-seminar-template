@@ -1,0 +1,34 @@
+{
+  "currency": "CAD",
+  "offer_catalog": [
+    {
+      "id": "service-1",
+      "label": "TODO: Votre premier service",
+      "description": "TODO: Description courte du service.",
+      "price_min": 0,
+      "price_max": 0,
+      "requires_approval": false
+    },
+    {
+      "id": "service-2",
+      "label": "TODO: Votre deuxieme service",
+      "description": "TODO: Description courte du service.",
+      "price_min": 0,
+      "price_max": 0,
+      "requires_approval": false
+    },
+    {
+      "id": "engagement-personnalise",
+      "label": "Engagement personnalise",
+      "description": "Toute prestation hors catalogue. Necessite une revue manuelle.",
+      "price_min": 0,
+      "price_max": 999999,
+      "requires_approval": true
+    }
+  ],
+  "discount_rules": {
+    "max_discount_pct_auto": 10,
+    "max_discount_pct_with_approval": 25,
+    "no_discount_offers": ["engagement-personnalise"]
+  }
+}

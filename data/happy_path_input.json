@@ -1,0 +1,15 @@
+{
+  "company_mode": "executive-education",
+  "lead": {
+    "id": "exec-good-001",
+    "name": "Sophie Tremblay",
+    "title": "VP Stratégie",
+    "company": "Coopérative Boréal",
+    "company_size": 220,
+    "country": "CA",
+    "source": "formulaire site web",
+    "timestamp": "2026-05-12T09:14:00-04:00",
+    "recipient_email": "demo+exec-good@your-domain.example",
+    "inbound_message": "Bonjour, notre comité de direction veut consacrer une journée complète à cadrer notre stratégie IA pour 2027. Nous sommes 11 personnes au comité. Idéalement en septembre, à Montréal ou en visio. Pouvez-vous nous proposer un format et un budget?"
+  }
+}

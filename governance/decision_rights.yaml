@@ -1,0 +1,17 @@
+# Matrice de droits de decision — votre entreprise
+# Remplissez cette matrice pour votre agent choisi.
+
+artifact_kind: decision_rights
+title: "Droits de decision — [nom de votre entreprise]"
+
+decision_rights:
+  - actor: "TODO: [role humain ou agent]"
+    decision_type: "TODO: [type de decision]"
+    authority_level: decide  # decide | execute | recommend
+    escalation_path: "TODO: [a qui escalader]"
+    notes: ""
+
+  - actor: "TODO: [role humain ou agent]"
+    decision_type: "TODO: [type de decision]"
+    authority_level: execute
+    escalation_path: "TODO: [a qui escalader]"

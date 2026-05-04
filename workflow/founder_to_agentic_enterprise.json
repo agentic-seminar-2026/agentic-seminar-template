@@ -1,0 +1,725 @@
+{
+  "name": "Founder to Agentic Enterprise",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "founder-to-agentic-enterprise",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "node_webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        100,
+        300
+      ],
+      "webhookId": "founder-to-agentic-enterprise"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "company_mode",
+              "value": "={{$json.body.company_mode}}",
+              "type": "string"
+            },
+            {
+              "id": "a2",
+              "name": "lead",
+              "value": "={{$json.body.lead}}",
+              "type": "object"
+            },
+            {
+              "id": "a3",
+              "name": "run_id",
+              "value": "={{$execution.id}}",
+              "type": "string"
+            },
+            {
+              "id": "a4",
+              "name": "started_at",
+              "value": "={{$now.toISO()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "id": "node_set_input",
+      "name": "Set Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const PACKS = {\"executive-education\": {\"company_brief\": \"# Atelier Stratégie IA\\n\\n> **Note** : Ce document est rédigé en français car il décrit une marque\\n> orientée vers la clientèle francophone. Les rôles internes et la\\n> documentation technique restent en anglais.\\n\\n## Nom de l'entreprise\\n\\n**Atelier Stratégie IA** — *AI Strategy Studio*\\n\\n## Clientèle cible\\n\\nCadres supérieurs et équipes de direction d'entreprises de 50 à 500\\nemployés, principalement au Québec et en France, qui veulent comprendre\\ncomment intégrer l'IA générative à leur organisation sans se faire happer\\npar la technique.\\n\\n## Proposition de valeur\\n\\n> *« Trois jours pour transformer un comité de direction qui parle d'IA en\\n> un comité de direction qui pilote l'IA. »*\\n\\nNous offrons des formations courtes, intensives et pragmatiques, livrées par\\nun praticien-chercheur, qui produisent des décisions concrètes : une feuille\\nde route, un cadre de gouvernance, et trois cas d'usage prioritaires.\\n\\n## Services principaux\\n\\n- **Atelier exécutif (1 jour)** — diagnostic + cadrage stratégique pour un\\n  comité de direction.\\n- **Bootcamp Direction IA (3 jours)** — formation immersive avec un cas\\n  pratique d'entreprise.\\n- **Programme cohorte (6 semaines)** — accompagnement d'une cohorte de\\n  cadres dans le déploiement d'un cas d'usage.\\n\\n## Contraintes du fondateur\\n\\n- Un seul instructeur principal — pas plus de deux engagements simultanés.\\n- Refus systématique des projets de plus de 100 000 $ CAD sans contrat-cadre\\n  signé au préalable.\\n- Refus des engagements en moins de 14 jours d'avis (qualité du contenu).\\n- Aucune promesse de retour sur investissement chiffré : on vend de la\\n  capacité de décision, pas un résultat financier.\\n\\n## Énoncé de positionnement\\n\\nPour les comités de direction qui veulent passer de la curiosité à\\nl'exécution sur l'IA, l'Atelier Stratégie IA livre des formations\\npragmatiques de 1 à 6 semaines qui produisent une feuille de route et un\\ncadre de gouvernance — sans dépendance à un fournisseur, et sans\\n*hype*.\\n\\n## Ton et style de marque\\n\\n- **Ton** : sobre, exécutif, direct. On parle à des dirigeants pressés.\\n- **Vocabulaire** : éviter les anglicismes inutiles ; préférer\\n  *gouvernance*, *cadre*, *feuille de route*, *capacité*, *décision*.\\n- **Posture** : praticien-chercheur, pas vendeur. Pas d'emojis, pas de\\n  superlatifs.\\n- **Signature** : « Cordialement, » + nom + École de gestion, Université de\\n  Sherbrooke.\\n\", \"pricing_rules\": {\"currency\": \"CAD\", \"offer_catalog\": [{\"id\": \"atelier-exec-1j\", \"label\": \"Atelier exécutif — 1 jour\", \"description\": \"Diagnostic et cadrage stratégique pour un comité de direction (max 12 personnes).\", \"price_min\": 8000, \"price_max\": 15000, \"requires_approval\": false}, {\"id\": \"bootcamp-direction-3j\", \"label\": \"Bootcamp Direction IA — 3 jours\", \"description\": \"Formation immersive avec un cas pratique d'entreprise (max 20 personnes).\", \"price_min\": 25000, \"price_max\": 45000, \"requires_approval\": false}, {\"id\": \"programme-cohorte-6s\", \"label\": \"Programme cohorte — 6 semaines\", \"description\": \"Accompagnement d'une cohorte de cadres dans le déploiement d'un cas d'usage.\", \"price_min\": 60000, \"price_max\": 120000, \"requires_approval\": true}, {\"id\": \"engagement-personnalise\", \"label\": \"Engagement personnalisé\", \"description\": \"Toute prestation hors catalogue. Nécessite une revue manuelle.\", \"price_min\": 0, \"price_max\": 999999, \"requires_approval\": true}], \"discount_rules\": {\"max_discount_pct_auto\": 10, \"max_discount_pct_with_approval\": 25, \"no_discount_offers\": [\"engagement-personnalise\"]}}, \"approval_policy\": {\"max_auto_approved_price\": 45000, \"currency\": \"CAD\", \"blocked_claim_types\": [\"garantie de résultat\", \"promesse de retour sur investissement chiffré\", \"certification officielle non détenue\", \"comparaison nominative avec un concurrent\"], \"blocked_claim_patterns\": [\"garantit\", \"garanti\", \"ROI de\", \"retour sur investissement de\", \"certifié par\", \"agréé par\"], \"blocked_actions\": [\"auto_send_to_unverified_recipient\", \"send_without_human_review_above_threshold\", \"share_other_client_data\", \"promise_delivery_under_14_days\"], \"approval_required_for\": [\"offers_above_max_auto_approved_price\", \"discounts_above_10_pct\", \"engagements_under_14_days_notice\", \"custom_engagements\"], \"privacy_rules\": {\"no_personal_email_bcc\": true, \"no_other_client_names_in_draft\": true, \"no_personal_health_or_financial_data\": true}, \"escalation_reasons\": [\"Le prix dépasse le seuil d'auto-approbation\", \"Le brouillon contient une affirmation interdite\", \"Le client demande des données confidentielles d'un autre client\", \"Délai inférieur à 14 jours\", \"Score de qualification trop faible avec demande à fort enjeu\"]}}, \"market-intelligence\": {\"company_brief\": \"# Studio Veille Stratégique\\n\\n> **Note** : Document client en français. La documentation technique reste\\n> en anglais.\\n\\n## Nom de l'entreprise\\n\\n**Studio Veille Stratégique** — *Market Intelligence Studio*\\n\\n## Clientèle cible\\n\\nDirections marketing, stratégie ou produit d'entreprises B2B de taille\\nmoyenne (100 à 2000 employés) qui ont besoin d'une lecture continue de leur\\nmarché mais qui ne peuvent pas justifier une équipe interne de veille à\\ntemps plein.\\n\\n## Proposition de valeur\\n\\n> *« Une équipe de veille concurrentielle sans en porter le coût fixe. »*\\n\\nNous combinons un analyste-stratège humain et une chaîne d'agents pour\\nlivrer chaque semaine une note de veille concise, actionnable, et signée\\npar un humain.\\n\\n## Services principaux\\n\\n- **Note hebdomadaire** — synthèse d'une page sur les mouvements clés du\\n  marché du client.\\n- **Brief concurrentiel sur demande** — analyse approfondie d'un acteur\\n  ciblé (5 à 10 jours).\\n- **Tableau de bord trimestriel** — revue stratégique présentée en\\n  visioconférence avec recommandations.\\n\\n## Contraintes du fondateur\\n\\n- Aucune diffusion d'informations issues d'un client à un autre client,\\n  jamais.\\n- Aucun engagement à monitorer plus de cinq concurrents par client (limite\\n  qualité).\\n- Refus des demandes liées à des informations privées ou personnelles\\n  (employés, dossiers RH, finances individuelles).\\n- Refus des demandes de comparaison nominative diffamatoire.\\n\\n## Énoncé de positionnement\\n\\nPour les équipes de stratégie B2B qui veulent savoir ce qui change dans\\nleur marché sans bâtir une cellule interne, le Studio Veille Stratégique\\nlivre une note hebdomadaire signée par un analyste, appuyée par des agents\\nqui font le travail répétitif — sans risque juridique ni mélange entre\\nclients.\\n\\n## Ton et style de marque\\n\\n- **Ton** : analytique, factuel, neutre. Pas d'opinion gratuite.\\n- **Vocabulaire** : *signal faible*, *mouvement de marché*, *acteur*,\\n  *positionnement*, *implication stratégique*.\\n- **Posture** : analyste senior. Toujours citer la source.\\n- **Signature** : « Bien à vous, » + nom + Studio Veille Stratégique.\\n\", \"pricing_rules\": {\"currency\": \"CAD\", \"offer_catalog\": [{\"id\": \"note-hebdo\", \"label\": \"Note hebdomadaire\", \"description\": \"Synthèse d'une page chaque semaine, jusqu'à 5 concurrents suivis. Engagement minimum de 3 mois.\", \"price_min\": 4500, \"price_max\": 7500, \"price_period\": \"monthly\", \"requires_approval\": false}, {\"id\": \"brief-concurrent\", \"label\": \"Brief concurrentiel sur demande\", \"description\": \"Analyse approfondie d'un acteur ciblé, livrée en 5 à 10 jours ouvrables.\", \"price_min\": 6000, \"price_max\": 12000, \"requires_approval\": false}, {\"id\": \"tableau-trimestriel\", \"label\": \"Tableau de bord trimestriel\", \"description\": \"Revue stratégique présentée en visioconférence avec recommandations chiffrées.\", \"price_min\": 15000, \"price_max\": 28000, \"requires_approval\": false}, {\"id\": \"veille-personnalisee\", \"label\": \"Veille personnalisée\", \"description\": \"Toute prestation hors catalogue. Nécessite une revue manuelle.\", \"price_min\": 0, \"price_max\": 999999, \"requires_approval\": true}], \"discount_rules\": {\"max_discount_pct_auto\": 5, \"max_discount_pct_with_approval\": 15, \"no_discount_offers\": [\"veille-personnalisee\"]}}, \"approval_policy\": {\"max_auto_approved_price\": 28000, \"currency\": \"CAD\", \"blocked_claim_types\": [\"information attribuée à un autre client\", \"comparaison nominative diffamatoire\", \"donnée personnelle sur un employé identifié\", \"donnée financière privée non publique\"], \"blocked_claim_patterns\": [\"selon notre client\", \"comme nous l'avons fait pour\", \"données internes de\", \"fuite\", \"source confidentielle\"], \"blocked_actions\": [\"auto_send_to_unverified_recipient\", \"send_without_human_review_above_threshold\", \"share_other_client_data\", \"monitor_more_than_5_competitors\", \"include_personal_data_about_named_individuals\"], \"approval_required_for\": [\"offers_above_max_auto_approved_price\", \"discounts_above_5_pct\", \"monitoring_more_than_5_competitors\", \"custom_engagements\"], \"privacy_rules\": {\"no_personal_email_bcc\": true, \"no_other_client_names_in_draft\": true, \"no_personal_data_about_named_individuals\": true}, \"escalation_reasons\": [\"Le prix dépasse le seuil d'auto-approbation\", \"Le brouillon référence un autre client par son nom\", \"Le client demande plus de 5 concurrents à suivre\", \"Le client demande de l'information personnelle sur un employé identifié\", \"Score de qualification trop faible avec demande à fort enjeu\"]}}, \"growth-agency\": {\"company_brief\": \"# Croissance B2B\\n\\n> **Note** : Document client en français. La documentation technique reste\\n> en anglais.\\n\\n## Nom de l'entreprise\\n\\n**Croissance B2B** — *B2B Growth Agency*\\n\\n## Clientèle cible\\n\\nÉquipes de vente B2B d'entreprises de 20 à 300 employés, en croissance,\\nqui veulent industrialiser leur prospection sans embaucher cinq SDR.\\n\\n## Proposition de valeur\\n\\n> *« Vos commerciaux passent leurs journées à vendre, pas à chercher. »*\\n\\nNous fournissons des dossiers d'entreprise ciblés, prêts à être appelés,\\nlivrés chaque semaine, alignés sur le profil de client idéal et conformes\\naux règles de prospection (CASL au Canada, RGPD en Europe).\\n\\n## Services principaux\\n\\n- **Lot de comptes ciblés** — 25 à 100 entreprises qualifiées par semaine\\n  avec contexte décisionnel.\\n- **Brief de compte** — dossier détaillé sur une entreprise précise (signaux\\n  d'achat, organigramme exécutif public, déclencheurs).\\n- **Programme outbound assisté** — séquences rédigées et révisées par un\\n  humain, livrées au commercial pour envoi manuel.\\n\\n## Contraintes du fondateur\\n\\n- Aucun envoi automatisé sortant à des destinataires non vérifiés. Les\\n  séquences sont *rédigées* par les agents, *envoyées* par le commercial.\\n- Conformité CASL et RGPD : pas de collecte de données personnelles non\\n  publiques, pas d'achat de bases de données opaques.\\n- Refus des demandes incluant scraping de profils privés ou contournement\\n  d'opt-out.\\n- Refus des promesses de volume garanti de rendez-vous.\\n\\n## Énoncé de positionnement\\n\\nPour les équipes de vente B2B qui veulent un pipeline régulier sans\\nembaucher de SDR, Croissance B2B livre chaque semaine des comptes ciblés\\nqualifiés et des séquences rédigées — toujours dans le respect des règles\\nanti-pourriel, jamais en envoi automatisé.\\n\\n## Ton et style de marque\\n\\n- **Ton** : opérationnel, concret, orienté résultat — mais sans promesse\\n  irréaliste.\\n- **Vocabulaire** : *compte*, *signal d'achat*, *séquence*, *cadence*,\\n  *qualification*, *décideur*.\\n- **Posture** : partenaire des commerciaux, pas remplaçant.\\n- **Signature** : « Au plaisir, » + nom + Croissance B2B.\\n\", \"pricing_rules\": {\"currency\": \"CAD\", \"offer_catalog\": [{\"id\": \"lot-comptes-25\", \"label\": \"Lot de 25 comptes ciblés / semaine\", \"description\": \"25 entreprises qualifiées par semaine avec contexte décisionnel public.\", \"price_min\": 3500, \"price_max\": 5500, \"price_period\": \"monthly\", \"requires_approval\": false}, {\"id\": \"lot-comptes-100\", \"label\": \"Lot de 100 comptes ciblés / semaine\", \"description\": \"100 entreprises qualifiées par semaine. Engagement minimum 6 mois.\", \"price_min\": 9000, \"price_max\": 14000, \"price_period\": \"monthly\", \"requires_approval\": false}, {\"id\": \"brief-compte\", \"label\": \"Brief de compte\", \"description\": \"Dossier détaillé sur une entreprise précise (signaux d'achat, décideurs publics).\", \"price_min\": 800, \"price_max\": 1800, \"requires_approval\": false}, {\"id\": \"programme-outbound\", \"label\": \"Programme outbound assisté (3 mois)\", \"description\": \"Séquences rédigées et révisées, livrées au commercial pour envoi manuel.\", \"price_min\": 18000, \"price_max\": 35000, \"requires_approval\": false}, {\"id\": \"engagement-personnalise\", \"label\": \"Engagement personnalisé\", \"description\": \"Toute prestation hors catalogue. Nécessite une revue manuelle.\", \"price_min\": 0, \"price_max\": 999999, \"requires_approval\": true}], \"discount_rules\": {\"max_discount_pct_auto\": 7, \"max_discount_pct_with_approval\": 20, \"no_discount_offers\": [\"engagement-personnalise\"]}}, \"approval_policy\": {\"max_auto_approved_price\": 35000, \"currency\": \"CAD\", \"blocked_claim_types\": [\"garantie de nombre de rendez-vous\", \"garantie de revenu généré\", \"promesse de contournement d'opt-out\", \"promesse d'accès à des bases de données privées\"], \"blocked_claim_patterns\": [\"garantit\", \"garanti\", \"X rendez-vous garantis\", \"contourner\", \"scraping\", \"base de données privée\", \"sans CASL\", \"sans RGPD\"], \"blocked_actions\": [\"auto_send_outbound_email\", \"auto_send_to_unverified_recipient\", \"send_without_human_review_above_threshold\", \"scrape_private_profiles\", \"purchase_opaque_data_lists\", \"bypass_optout\"], \"approval_required_for\": [\"offers_above_max_auto_approved_price\", \"discounts_above_7_pct\", \"custom_engagements\", \"campaigns_targeting_more_than_500_contacts_per_week\"], \"privacy_rules\": {\"no_personal_email_bcc\": true, \"no_other_client_names_in_draft\": true, \"no_private_profile_data\": true, \"casl_compliant\": true, \"gdpr_compliant\": true}, \"escalation_reasons\": [\"Le prix dépasse le seuil d'auto-approbation\", \"Le brouillon contient une promesse de volume garanti\", \"Le client demande de l'envoi automatique sortant\", \"Le client demande du scraping ou contournement d'opt-out\", \"Score de qualification trop faible avec demande à fort enjeu\"]}}};\n\nconst mode = $json.company_mode;\nconst pack = PACKS[mode];\nif (!pack) {\n  throw new Error('Unknown company_mode: ' + mode);\n}\nreturn [{\n  json: {\n    ...$json,\n    company_brief: pack.company_brief,\n    pricing_rules: pack.pricing_rules,\n    approval_policy: pack.approval_policy,\n  }\n}];\n"
+      },
+      "id": "node_load_pack",
+      "name": "Load Company Pack",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "# Prompt — Step 1: Research\n\n## Role\n\nYou are a research analyst supporting a founder. Your job is to read a raw\ninbound lead message and produce a structured opportunity memo. You do not\nrecommend an offer here. You do not draft a reply. You only summarize what\nthe lead is asking for, what they likely need, and what is unclear.\n\n## Inputs (provided by n8n)\n\n- `company_brief` — markdown describing the founder's company, services,\n  positioning, and tone.\n- `lead` — JSON with `id`, `name`, `title`, `company`, `company_size`,\n  `country`, `source`, `timestamp`, `inbound_message` (in French or English).\n\n## Hard rules\n\n1. Respond with **JSON only**. No prose. No markdown. No code fences.\n2. Do not invent facts not present in the inbound message.\n3. If the lead message contains a request that obviously violates the\n   company's positioning (e.g. asks for a service the company does not\n   sell), record that in `caveats` rather than dropping it silently.\n4. `confidence` is a float in `[0, 1]`. Use a low value when the message is\n   short, ambiguous, or missing key information (budget, timeline, scope).\n\n## Output schema\n\n```json\n{\n  \"lead_name\": \"string\",\n  \"company_name\": \"string\",\n  \"summary\": \"string (2-3 sentences, neutral, factual)\",\n  \"likely_needs\": [\"string\", \"...\"],\n  \"opportunity_hypothesis\": \"string (one sentence: what they probably want to buy)\",\n  \"caveats\": [\"string\", \"...\"],\n  \"confidence\": 0.0\n}\n```\n\n## Example (illustrative)\n\nInput message: *\"On a 3 commerciaux qui passent trop de temps à chercher\ndes comptes. On voudrait recevoir 25 comptes ciblés par semaine dans le\nsecteur manufacturier au Québec. Engagement de 6 mois envisageable.\"*\n\nOutput:\n\n```json\n{\n  \"lead_name\": \"Antoine Bélanger\",\n  \"company_name\": \"Cobalt Logiciels\",\n  \"summary\": \"Sales team of 3 spending too much time on prospecting; wants weekly target accounts in QC manufacturing. Open to a 6-month engagement.\",\n  \"likely_needs\": [\"weekly account targeting\", \"manufacturing-vertical focus\", \"QC geographic scope\"],\n  \"opportunity_hypothesis\": \"Standard 25-accounts-per-week subscription for 6 months.\",\n  \"caveats\": [\"Budget not stated\"],\n  \"confidence\": 0.72\n}\n```\n"
+            },
+            {
+              "role": "user",
+              "content": "Voici le brief de la société et le lead. Réponds en JSON valide selon le schéma du prompt système.\n\nBRIEF:\n{{ $json.company_brief }}\n\nLEAD:\n{{ JSON.stringify($json.lead) }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node_ai_research",
+      "name": "AI Research",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        760,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI_CRED_ID",
+          "name": "openai_main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1",
+              "name": "research_output",
+              "value": "={{ JSON.parse($json.message.content) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_parse_research",
+      "name": "Parse Research",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "# Prompt — Step 2: Qualification\n\n## Role\n\nYou are a qualification analyst. Given the structured research memo and the\ncompany brief, you score the opportunity on four dimensions and recommend\nthe next step. You are **not** designing the offer.\n\n## Inputs\n\n- `company_brief` — markdown.\n- `research_output` — JSON from Step 1.\n- `lead` — original JSON (you may need company size, country, source).\n\n## Hard rules\n\n1. Respond with **JSON only**. No prose, no markdown, no code fences.\n2. `fit_score` is an integer 0–100. Anchor at:\n   - 80–100: ideal customer profile, clear scope, plausible budget.\n   - 50–79: good shape but ≥1 unknown (budget, scope, timeline).\n   - 20–49: ambiguous, off-ICP, or signals of difficult engagement.\n   - 0–19: misaligned or risky (asks blocked actions, regulated, hostile).\n3. `urgency` is `\"low\" | \"medium\" | \"high\"`.\n4. `budget_signal` is `\"low\" | \"medium\" | \"high\" | \"unknown\"`.\n5. `risk_flags` lists short tokens (e.g. `\"no_budget_stated\"`,\n   `\"requested_blocked_action\"`, `\"timeline_too_short\"`,\n   `\"unsupported_claim_request\"`, `\"requests_competitor_data\"`).\n   Use `[]` if none.\n6. `recommended_next_step` is a short sentence the founder could read.\n\n## Output schema\n\n```json\n{\n  \"fit_score\": 0,\n  \"urgency\": \"low|medium|high\",\n  \"budget_signal\": \"low|medium|high|unknown\",\n  \"risk_flags\": [\"string\", \"...\"],\n  \"recommended_next_step\": \"string\",\n  \"reasoning_summary\": \"string (one short paragraph)\"\n}\n```\n"
+            },
+            {
+              "role": "user",
+              "content": "BRIEF:\n{{ $json.company_brief }}\n\nLEAD:\n{{ JSON.stringify($json.lead) }}\n\nRESEARCH:\n{{ JSON.stringify($json.research_output) }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node_ai_qualification",
+      "name": "AI Qualification",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        1200,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI_CRED_ID",
+          "name": "openai_main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1",
+              "name": "qualification_output",
+              "value": "={{ JSON.parse($json.message.content) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_parse_qualification",
+      "name": "Parse Qualification",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "# Prompt — Step 3: Offer Design\n\n## Role\n\nYou recommend a single offer from the company's catalog. You may not invent\nnew offers. You may not propose a price outside the catalog's range. If\nnothing in the catalog fits, recommend `engagement-personnalise` (or the\nequivalent custom-engagement offer in the catalog) and set\n`approval_required: true`.\n\n## Inputs\n\n- `company_brief` — markdown.\n- `pricing_rules` — JSON: `{currency, offer_catalog[], discount_rules}`.\n- `research_output`, `qualification_output` — JSONs from prior steps.\n\n## Hard rules\n\n1. Respond with **JSON only**.\n2. `recommended_offer` MUST be the `id` of an entry in\n   `pricing_rules.offer_catalog`.\n3. `price_range` is a string like `\"4500-7500 CAD/mois\"` or\n   `\"25000-45000 CAD\"`. Use the catalog's `price_period` if present.\n4. `approval_required` is `true` if any of:\n   - the catalog entry has `requires_approval: true`,\n   - you are recommending a price near or above the catalog max,\n   - the qualification flagged any `risk_flags`.\n5. `included_deliverables` is a short list (3–5 items), in the same\n   language as the company brief (French for these packs).\n6. `why_this_offer` is one short sentence.\n\n## Output schema\n\n```json\n{\n  \"recommended_offer\": \"string (catalog id)\",\n  \"price_range\": \"string\",\n  \"why_this_offer\": \"string\",\n  \"included_deliverables\": [\"string\", \"...\"],\n  \"approval_required\": true\n}\n```\n"
+            },
+            {
+              "role": "user",
+              "content": "BRIEF:\n{{ $json.company_brief }}\n\nPRICING_RULES:\n{{ JSON.stringify($json.pricing_rules) }}\n\nRESEARCH:\n{{ JSON.stringify($json.research_output) }}\n\nQUALIFICATION:\n{{ JSON.stringify($json.qualification_output) }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node_ai_offer_design",
+      "name": "AI Offer Design",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        1640,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI_CRED_ID",
+          "name": "openai_main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1",
+              "name": "offer_design_output",
+              "value": "={{ JSON.parse($json.message.content) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_parse_offer",
+      "name": "Parse Offer",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "# Prompt — Step 4: Customer Draft (FRENCH)\n\n## Role\n\nVous êtes l'assistant rédactionnel du fondateur. Vous écrivez un courriel\nde réponse en **français** (français du Québec), professionnel, sobre,\nfidèle au ton décrit dans le `company_brief`. Vous ne promettez rien qui\nne figure pas dans l'offre recommandée.\n\n## Inputs\n\n- `company_brief` — markdown (contient la signature et le ton).\n- `lead` — JSON (vous devez vous adresser à `lead.name`).\n- `offer_design_output` — JSON (offre, fourchette de prix, livrables).\n\n## Hard rules\n\n1. Réponse en **JSON uniquement**. Pas de prose, pas de markdown, pas de\n   blocs de code.\n2. Le contenu textuel (`subject`, `body`) est en **français**.\n3. Le `body` :\n   - commence par une formule d'appel personnalisée (`Bonjour {prénom},`),\n   - reformule en une phrase ce que le client a demandé,\n   - propose **une seule** offre (celle de `offer_design_output`),\n   - cite la fourchette de prix telle qu'elle apparaît dans\n     `offer_design_output.price_range`,\n   - mentionne explicitement si une **revue manuelle** est requise avant\n     toute confirmation (lorsque `approval_required: true`),\n   - se termine par la signature exacte indiquée dans `company_brief`.\n4. **Ne jamais** inclure de garantie de résultat, de promesse de retour\n   sur investissement chiffré, de référence nominative à un autre client,\n   ni d'adresse en bcc.\n5. `tone_check` :\n   - `\"pass\"` si le ton respecte le `company_brief`,\n   - `\"needs_review\"` si vous détectez une formulation hors ton\n     (superlatifs, anglicismes lourds, ton vendeur agressif).\n6. `claims_to_verify` liste les affirmations qui devraient être vérifiées\n   par un humain avant envoi (ex. *« disponibilité en septembre »*,\n   *« délai de livraison »*).\n7. `send_status` est toujours `\"draft_only\"` à la sortie de cette étape.\n   Le déclenchement réel de l'envoi est décidé par le nœud de politique\n   plus tard dans le flux.\n\n## Output schema\n\n```json\n{\n  \"subject\": \"string (français)\",\n  \"body\": \"string (français, multi-paragraphes, terminé par la signature)\",\n  \"tone_check\": \"pass|needs_review\",\n  \"claims_to_verify\": [\"string\", \"...\"],\n  \"send_status\": \"draft_only\"\n}\n```\n"
+            },
+            {
+              "role": "user",
+              "content": "BRIEF:\n{{ $json.company_brief }}\n\nLEAD:\n{{ JSON.stringify($json.lead) }}\n\nOFFRE:\n{{ JSON.stringify($json.offer_design_output) }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node_ai_customer_draft",
+      "name": "AI Customer Draft (FR)",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        2080,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI_CRED_ID",
+          "name": "openai_main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1",
+              "name": "customer_draft_output",
+              "value": "={{ JSON.parse($json.message.content) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_parse_draft",
+      "name": "Parse Draft",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "\nconst PERSONAL_EMAIL_DOMAINS = [\n  '@gmail.com','@yahoo.com','@yahoo.fr','@hotmail.com','@hotmail.fr',\n  '@outlook.com','@outlook.fr','@icloud.com','@me.com','@live.com',\n  '@aol.com','@proton.me','@protonmail.com'\n];\n\nconst BLOCKED_ACTION_TRIGGERS = {\n  auto_send_outbound_email: ['send the emails directly','envoi automatique','envoyer automatiquement'],\n  auto_send_to_unverified_recipient: ['no human review','sans validation'],\n  scrape_private_profiles: ['scraping','scrape ','scraper','profils privés'],\n  bypass_optout: ['no casl','sans casl','no gdpr','sans rgpd','bypass opt-out','contourner'],\n  purchase_opaque_data_lists: ['acheter une base','buy a database'],\n  share_other_client_data: ['data from your client','données de votre client','comme vous avez fait pour'],\n  promise_delivery_under_14_days: ['en moins de 14 jours','dans 10 jours','dans 12 jours'],\n  monitor_more_than_5_competitors: ['suivre 6 concurrents','suivre 7 concurrents','suivre 8 concurrents','suivre 9 concurrents','suivre 10 concurrents'],\n  include_personal_data_about_named_individuals: ['dossier nominatif','données personnelles sur'],\n};\n\nfunction bodyContains(body, needle) {\n  if (!body || !needle) return false;\n  return String(body).toLowerCase().includes(String(needle).toLowerCase());\n}\nfunction maxOfferPrice(offer_id, pricing_rules) {\n  const list = (pricing_rules && pricing_rules.offer_catalog) || [];\n  const entry = list.find(o => o.id === offer_id);\n  return entry ? Number(entry.price_max || 0) : 0;\n}\n\nconst data = $json;\nconst approval = data.approval_policy || {};\nconst draftBody = (data.customer_draft_output && data.customer_draft_output.body) || '';\nconst draftSubject = (data.customer_draft_output && data.customer_draft_output.subject) || '';\nconst fullDraft = draftSubject + '\\n' + draftBody;\nconst inboundMsg = ((data.lead && data.lead.inbound_message) || '').toLowerCase();\n\nconst reasons = [];\nlet blocked = false;\n\nconst patterns = approval.blocked_claim_patterns || [];\nfor (const p of patterns) {\n  if (bodyContains(fullDraft, p)) { reasons.push('blocked_claim_pattern_detected'); blocked = true; break; }\n}\nif (approval.privacy_rules && approval.privacy_rules.no_personal_email_bcc) {\n  for (const dom of PERSONAL_EMAIL_DOMAINS) {\n    if (bodyContains(fullDraft, dom)) { reasons.push('personal_email_bcc'); blocked = true; break; }\n  }\n}\nconst blockedActions = approval.blocked_actions || [];\nfor (const action of blockedActions) {\n  const triggers = BLOCKED_ACTION_TRIGGERS[action] || [];\n  if (triggers.some(t => inboundMsg.includes(t.toLowerCase()))) {\n    reasons.push('requested_blocked_action'); blocked = true; break;\n  }\n}\nif (approval.privacy_rules && approval.privacy_rules.no_other_client_names_in_draft) {\n  if (inboundMsg.includes('your client') || inboundMsg.includes('votre client') ||\n      inboundMsg.includes('the playbook you built for') || inboundMsg.includes('reuse the playbook')) {\n    reasons.push('other_client_referenced'); blocked = true;\n  }\n}\nconst offer_id = (data.offer_design_output && data.offer_design_output.recommended_offer) || '';\nconst offerMax = maxOfferPrice(offer_id, data.pricing_rules);\nconst threshold = Number(approval.max_auto_approved_price);\nif (!isNaN(threshold) && offerMax > threshold) reasons.push('price_above_threshold');\nif (data.offer_design_output && data.offer_design_output.approval_required === true) reasons.push('offer_marked_approval_required');\nconst riskFlags = (data.qualification_output && data.qualification_output.risk_flags) || [];\nif (Array.isArray(riskFlags) && riskFlags.length > 0) reasons.push('qualification_risk_flag');\n\nlet status;\nif (blocked) status = 'blocked';\nelse if (reasons.length > 0) status = 'needs_human_review';\nelse status = 'approved';\n\nconst required_approver = status === 'approved' ? '' : 'founder';\nconst safe_next_action = status === 'approved'\n  ? 'Send the email and append the audit row.'\n  : status === 'blocked'\n    ? 'Do NOT send. Founder reviews the draft and the policy reasons before any further action.'\n    : 'Founder reviews the draft and confirms approval before any send.';\n\nreturn [{\n  json: {\n    ...data,\n    policy_check: {\n      status,\n      reasons: Array.from(new Set(reasons)),\n      required_approver,\n      safe_next_action\n    }\n  }\n}];\n"
+      },
+      "id": "node_policy_code",
+      "name": "Policy Code (Deterministic)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.policy_check.status }}",
+              "rightValue": "approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node_if_approved",
+      "name": "IF Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2740,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json.lead.recipient_email }}",
+        "subject": "={{ $json.customer_draft_output.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.customer_draft_output.body }}",
+        "options": {
+          "replyTo": "={{ $env.GMAIL_REPLY_TO }}"
+        }
+      },
+      "id": "node_gmail_send",
+      "name": "Gmail Send",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2960,
+        180
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_GMAIL_CRED_ID",
+          "name": "gmail_main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "final_action",
+              "value": "email_sent",
+              "type": "string"
+            },
+            {
+              "id": "o2",
+              "name": "human_approval_required",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_set_approved",
+      "name": "Set Approved Outcome",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "final_action",
+              "value": "human_review_required",
+              "type": "string"
+            },
+            {
+              "id": "o2",
+              "name": "human_approval_required",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "node_set_blocked",
+      "name": "Set Blocked Outcome",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3180,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ar1",
+              "name": "audit_row",
+              "value": "={{ ({\n  timestamp: $now.toISO(),\n  run_id: $json.run_id,\n  company_mode: $json.company_mode,\n  input_id: $json.lead.id,\n  fit_score: $json.qualification_output.fit_score,\n  recommended_offer: $json.offer_design_output.recommended_offer,\n  policy_status: $json.policy_check.status,\n  reasons: $json.policy_check.reasons,\n  human_approval_required: $json.human_approval_required,\n  final_action: $json.final_action,\n  notes: ($json.policy_check.safe_next_action || '').slice(0,200)\n}) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "id": "node_build_audit_row",
+      "name": "Build Audit Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.AUDIT_WEBHOOK_URL }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.audit_row }}",
+        "options": {}
+      },
+      "id": "node_append_audit_log",
+      "name": "Append Audit Log",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3620,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Input": {
+      "main": [
+        [
+          {
+            "node": "Load Company Pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Company Pack": {
+      "main": [
+        [
+          {
+            "node": "AI Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Research": {
+      "main": [
+        [
+          {
+            "node": "Parse Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Research": {
+      "main": [
+        [
+          {
+            "node": "AI Qualification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Qualification": {
+      "main": [
+        [
+          {
+            "node": "Parse Qualification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Qualification": {
+      "main": [
+        [
+          {
+            "node": "AI Offer Design",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Offer Design": {
+      "main": [
+        [
+          {
+            "node": "Parse Offer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Offer": {
+      "main": [
+        [
+          {
+            "node": "AI Customer Draft (FR)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Customer Draft (FR)": {
+      "main": [
+        [
+          {
+            "node": "Parse Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Draft": {
+      "main": [
+        [
+          {
+            "node": "Policy Code (Deterministic)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Policy Code (Deterministic)": {
+      "main": [
+        [
+          {
+            "node": "IF Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Approved": {
+      "main": [
+        [
+          {
+            "node": "Gmail Send",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Blocked Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Send": {
+      "main": [
+        [
+          {
+            "node": "Set Approved Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Approved Outcome": {
+      "main": [
+        [
+          {
+            "node": "Build Audit Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Blocked Outcome": {
+      "main": [
+        [
+          {
+            "node": "Build Audit Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Audit Row": {
+      "main": [
+        [
+          {
+            "node": "Append Audit Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [],
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

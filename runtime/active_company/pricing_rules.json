@@ -1,0 +1,52 @@
+{
+  "currency": "CAD",
+  "offer_catalog": [
+    {
+      "id": "lot-comptes-25",
+      "label": "Lot de 25 comptes ciblés / semaine",
+      "description": "25 entreprises qualifiées par semaine avec contexte décisionnel public.",
+      "price_min": 3500,
+      "price_max": 5500,
+      "price_period": "monthly",
+      "requires_approval": false
+    },
+    {
+      "id": "lot-comptes-100",
+      "label": "Lot de 100 comptes ciblés / semaine",
+      "description": "100 entreprises qualifiées par semaine. Engagement minimum 6 mois.",
+      "price_min": 9000,
+      "price_max": 14000,
+      "price_period": "monthly",
+      "requires_approval": false
+    },
+    {
+      "id": "brief-compte",
+      "label": "Brief de compte",
+      "description": "Dossier détaillé sur une entreprise précise (signaux d'achat, décideurs publics).",
+      "price_min": 800,
+      "price_max": 1800,
+      "requires_approval": false
+    },
+    {
+      "id": "programme-outbound",
+      "label": "Programme outbound assisté (3 mois)",
+      "description": "Séquences rédigées et révisées, livrées au commercial pour envoi manuel.",
+      "price_min": 18000,
+      "price_max": 35000,
+      "requires_approval": false
+    },
+    {
+      "id": "engagement-personnalise",
+      "label": "Engagement personnalisé",
+      "description": "Toute prestation hors catalogue. Nécessite une revue manuelle.",
+      "price_min": 0,
+      "price_max": 999999,
+      "requires_approval": true
+    }
+  ],
+  "discount_rules": {
+    "max_discount_pct_auto": 7,
+    "max_discount_pct_with_approval": 20,
+    "no_discount_offers": ["engagement-personnalise"]
+  }
+}

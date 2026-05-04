@@ -1,0 +1,30 @@
+{
+  "max_auto_approved_price": 0,
+  "currency": "CAD",
+  "blocked_claim_types": [
+    "TODO: type d'affirmation interdite (ex: garantie de resultat)"
+  ],
+  "blocked_claim_patterns": [
+    "TODO: mot-cle a bloquer (ex: garantit, ROI de)"
+  ],
+  "blocked_actions": [
+    "auto_send_to_unverified_recipient",
+    "send_without_human_review_above_threshold",
+    "share_other_client_data"
+  ],
+  "approval_required_for": [
+    "offers_above_max_auto_approved_price",
+    "discounts_above_10_pct",
+    "TODO: ajoutez vos propres declencheurs d'approbation"
+  ],
+  "privacy_rules": {
+    "no_personal_email_bcc": true,
+    "no_other_client_names_in_draft": true,
+    "no_personal_health_or_financial_data": true
+  },
+  "escalation_reasons": [
+    "Le prix depasse le seuil d'auto-approbation",
+    "Le brouillon contient une affirmation interdite",
+    "TODO: ajoutez vos propres raisons d'escalade"
+  ]
+}

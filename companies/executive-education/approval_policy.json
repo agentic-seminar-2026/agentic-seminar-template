@@ -1,0 +1,42 @@
+{
+  "max_auto_approved_price": 45000,
+  "currency": "CAD",
+  "blocked_claim_types": [
+    "garantie de résultat",
+    "promesse de retour sur investissement chiffré",
+    "certification officielle non détenue",
+    "comparaison nominative avec un concurrent"
+  ],
+  "blocked_claim_patterns": [
+    "garantit",
+    "garanti",
+    "ROI de",
+    "retour sur investissement de",
+    "certifié par",
+    "agréé par"
+  ],
+  "blocked_actions": [
+    "auto_send_to_unverified_recipient",
+    "send_without_human_review_above_threshold",
+    "share_other_client_data",
+    "promise_delivery_under_14_days"
+  ],
+  "approval_required_for": [
+    "offers_above_max_auto_approved_price",
+    "discounts_above_10_pct",
+    "engagements_under_14_days_notice",
+    "custom_engagements"
+  ],
+  "privacy_rules": {
+    "no_personal_email_bcc": true,
+    "no_other_client_names_in_draft": true,
+    "no_personal_health_or_financial_data": true
+  },
+  "escalation_reasons": [
+    "Le prix dépasse le seuil d'auto-approbation",
+    "Le brouillon contient une affirmation interdite",
+    "Le client demande des données confidentielles d'un autre client",
+    "Délai inférieur à 14 jours",
+    "Score de qualification trop faible avec demande à fort enjeu"
+  ]
+}

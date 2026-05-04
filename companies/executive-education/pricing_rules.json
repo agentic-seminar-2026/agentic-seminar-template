@@ -1,0 +1,42 @@
+{
+  "currency": "CAD",
+  "offer_catalog": [
+    {
+      "id": "atelier-exec-1j",
+      "label": "Atelier exécutif — 1 jour",
+      "description": "Diagnostic et cadrage stratégique pour un comité de direction (max 12 personnes).",
+      "price_min": 8000,
+      "price_max": 15000,
+      "requires_approval": false
+    },
+    {
+      "id": "bootcamp-direction-3j",
+      "label": "Bootcamp Direction IA — 3 jours",
+      "description": "Formation immersive avec un cas pratique d'entreprise (max 20 personnes).",
+      "price_min": 25000,
+      "price_max": 45000,
+      "requires_approval": false
+    },
+    {
+      "id": "programme-cohorte-6s",
+      "label": "Programme cohorte — 6 semaines",
+      "description": "Accompagnement d'une cohorte de cadres dans le déploiement d'un cas d'usage.",
+      "price_min": 60000,
+      "price_max": 120000,
+      "requires_approval": true
+    },
+    {
+      "id": "engagement-personnalise",
+      "label": "Engagement personnalisé",
+      "description": "Toute prestation hors catalogue. Nécessite une revue manuelle.",
+      "price_min": 0,
+      "price_max": 999999,
+      "requires_approval": true
+    }
+  ],
+  "discount_rules": {
+    "max_discount_pct_auto": 10,
+    "max_discount_pct_with_approval": 25,
+    "no_discount_offers": ["engagement-personnalise"]
+  }
+}

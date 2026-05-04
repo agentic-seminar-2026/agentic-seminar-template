@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "workflow_name": "founder_to_agentic_enterprise",
+  "trigger": "webhook",
+  "nodes": [
+    {
+      "id": "webhook",
+      "type": "n8n-nodes-base.webhook",
+      "purpose": "Public POST entry point for one demo run.",
+      "inputs": [],
+      "outputs": ["body.company_mode", "body.lead"],
+      "next": "set_input"
+    },
+    {
+      "id": "set_input",
+      "type": "n8n-nodes-base.set",
+      "purpose": "Promote webhook body into typed top-level fields.",
+      "inputs": ["body.company_mode", "body.lead"],
+      "outputs": ["company_mode", "lead", "run_id", "started_at"],
+      "next": "load_company_pack"
+    },
+    {
+      "id": "load_company_pack",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Read the company pack files for the chosen mode from workflow static data.",
+      "inputs": ["company_mode"],
+      "outputs": ["company_brief", "pricing_rules", "approval_policy"],
+      "next": "ai_research"
+    },
+    {
+      "id": "ai_research",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "purpose": "Produce structured research memo from the inbound message.",
+      "inputs": ["company_brief", "lead"],
+      "outputs": ["message.content (research JSON string)"],
+      "next": "parse_research"
+    },
+    {
+      "id": "parse_research",
+      "type": "n8n-nodes-base.set",
+      "purpose": "Parse research JSON; on parse error emit {} so policy gate routes to needs_human_review.",
+      "inputs": ["message.content"],
+      "outputs": ["research_output"],
+      "next": "ai_qualification"
+    },
+    {
+      "id": "ai_qualification",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "purpose": "Score fit, urgency, budget, risk; recommend next step.",
+      "inputs": ["company_brief", "lead", "research_output"],
+      "outputs": ["message.content (qualification JSON string)"],
+      "next": "parse_qualification"
+    },
+    {
+      "id": "parse_qualification",
+      "type": "n8n-nodes-base.set",
+      "inputs": ["message.content"],
+      "outputs": ["qualification_output"],
+      "next": "ai_offer_design"
+    },
+    {
+      "id": "ai_offer_design",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "purpose": "Pick one offer from pricing_rules.offer_catalog and price it.",
+      "inputs": ["company_brief", "pricing_rules", "research_output", "qualification_output"],
+      "outputs": ["message.content (offer JSON string)"],
+      "next": "parse_offer"
+    },
+    {
+      "id": "parse_offer",
+      "type": "n8n-nodes-base.set",
+      "inputs": ["message.content"],
+      "outputs": ["offer_design_output"],
+      "next": "ai_customer_draft"
+    },
+    {
+      "id": "ai_customer_draft",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "purpose": "Draft the French customer email.",
+      "inputs": ["company_brief", "lead", "offer_design_output"],
+      "outputs": ["message.content (draft JSON string, FRENCH)"],
+      "next": "parse_draft"
+    },
+    {
+      "id": "parse_draft",
+      "type": "n8n-nodes-base.set",
+      "inputs": ["message.content"],
+      "outputs": ["customer_draft_output"],
+      "next": "policy_code"
+    },
+    {
+      "id": "policy_code",
+      "type": "n8n-nodes-base.code",
+      "purpose": "DETERMINISTIC GOVERNANCE GATE. Pure JS evaluation of policy rules.",
+      "inputs": ["approval_policy", "pricing_rules", "offer_design_output", "customer_draft_output", "qualification_output", "lead"],
+      "outputs": ["policy_check"],
+      "next": "if_approved"
+    },
+    {
+      "id": "if_approved",
+      "type": "n8n-nodes-base.if",
+      "purpose": "Route on policy_check.status == 'approved'.",
+      "inputs": ["policy_check.status"],
+      "outputs": ["true -> gmail_send", "false -> set_blocked_outcome"],
+      "next_true": "gmail_send",
+      "next_false": "set_blocked_outcome"
+    },
+    {
+      "id": "gmail_send",
+      "type": "n8n-nodes-base.gmail",
+      "purpose": "REAL email send. Approved branch only. To controlled inbox only.",
+      "inputs": ["lead.recipient_email", "customer_draft_output.subject", "customer_draft_output.body"],
+      "outputs": ["gmail_response"],
+      "next": "set_approved_outcome"
+    },
+    {
+      "id": "set_approved_outcome",
+      "type": "n8n-nodes-base.set",
+      "inputs": ["gmail_response"],
+      "outputs": ["final_action='email_sent'", "human_approval_required=false"],
+      "next": "build_audit_row"
+    },
+    {
+      "id": "set_blocked_outcome",
+      "type": "n8n-nodes-base.set",
+      "inputs": ["policy_check"],
+      "outputs": ["final_action='human_review_required'", "human_approval_required=true"],
+      "next": "build_audit_row"
+    },
+    {
+      "id": "build_audit_row",
+      "type": "n8n-nodes-base.set",
+      "purpose": "Assemble the final audit JSON.",
+      "inputs": ["company_mode", "lead", "qualification_output", "offer_design_output", "policy_check", "final_action"],
+      "outputs": ["audit_row"],
+      "next": "append_audit_log"
+    },
+    {
+      "id": "append_audit_log",
+      "type": "n8n-nodes-base.httpRequest",
+      "purpose": "POST audit_row to a webhook.site URL (or replace with Google Sheets / Slack).",
+      "inputs": ["audit_row"],
+      "outputs": [],
+      "next": null
+    }
+  ]
+}

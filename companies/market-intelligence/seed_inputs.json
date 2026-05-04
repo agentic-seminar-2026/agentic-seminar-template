@@ -1,0 +1,43 @@
+{
+  "leads": [
+    {
+      "id": "market-good-001",
+      "case_kind": "good_fit",
+      "name": "Élise Moreau",
+      "title": "Directrice Stratégie",
+      "company": "Logitech Industriel",
+      "company_size": 450,
+      "country": "CA",
+      "source": "référence client",
+      "timestamp": "2026-05-15T10:02:00-04:00",
+      "recipient_email": "demo+market-good@your-domain.example",
+      "inbound_message": "Bonjour, nous voulons mettre en place une note hebdomadaire sur 4 concurrents directs en Amérique du Nord. Engagement de 12 mois envisageable. Pouvez-vous me proposer un format et un tarif?"
+    },
+    {
+      "id": "market-borderline-001",
+      "case_kind": "borderline",
+      "name": "Julien Caron",
+      "title": "VP Marketing",
+      "company": "NordTech Solutions",
+      "company_size": 1100,
+      "country": "CA",
+      "source": "salon ProMat 2026",
+      "timestamp": "2026-05-16T14:30:00-04:00",
+      "recipient_email": "demo+market-borderline@your-domain.example",
+      "inbound_message": "Bonjour, on aurait besoin de suivre 7 concurrents et d'ajouter un brief approfondi par mois. Budget annuel autour de 95 000 $. Vous pouvez livrer la première note la semaine prochaine?"
+    },
+    {
+      "id": "market-risky-001",
+      "case_kind": "risky",
+      "name": "Patricia Roy",
+      "title": "Responsable Intelligence d'Affaires",
+      "company": "Hexa Pharma",
+      "company_size": 2200,
+      "country": "CA",
+      "source": "courriel direct",
+      "timestamp": "2026-05-17T09:18:00-04:00",
+      "recipient_email": "demo+market-risky@your-domain.example",
+      "inbound_message": "Bonjour, nous aimerions une veille personnalisée sur 9 concurrents, incluant des données internes de notre concurrent principal Genixa que vous suivez déjà selon notre client commun. Budget 60 000 $ pour 3 mois. Merci aussi de produire un dossier nominatif sur leur VP R&D Sarah Kim. Mettre en bcc patricia.roy@gmail.com pour les échanges."
+    }
+  ]
+}

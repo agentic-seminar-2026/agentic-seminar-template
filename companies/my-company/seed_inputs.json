@@ -1,0 +1,30 @@
+{
+  "leads": [
+    {
+      "id": "my-good-001",
+      "case_kind": "good_fit",
+      "name": "TODO: Nom du prospect",
+      "title": "TODO: Titre du prospect",
+      "company": "TODO: Nom de l'entreprise prospect",
+      "company_size": 100,
+      "country": "CA",
+      "source": "formulaire site web",
+      "timestamp": "2026-06-04T14:00:00-04:00",
+      "recipient_email": "demo+my-good@your-domain.example",
+      "inbound_message": "TODO: Redigez un message entrant realiste d'un bon prospect pour votre entreprise."
+    },
+    {
+      "id": "my-risky-001",
+      "case_kind": "risky",
+      "name": "TODO: Nom du prospect risque",
+      "title": "TODO: Titre",
+      "company": "TODO: Nom de l'entreprise",
+      "company_size": 50,
+      "country": "CA",
+      "source": "courriel direct",
+      "timestamp": "2026-06-04T15:00:00-04:00",
+      "recipient_email": "demo+my-risky@your-domain.example",
+      "inbound_message": "TODO: Redigez un message qui devrait declencher au moins 2 regles de votre politique d'approbation (ex: montant trop eleve, promesse interdite, delai trop court)."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "currency": "CAD",
+  "offer_catalog": [
+    {
+      "id": "note-hebdo",
+      "label": "Note hebdomadaire",
+      "description": "Synthèse d'une page chaque semaine, jusqu'à 5 concurrents suivis. Engagement minimum de 3 mois.",
+      "price_min": 4500,
+      "price_max": 7500,
+      "price_period": "monthly",
+      "requires_approval": false
+    },
+    {
+      "id": "brief-concurrent",
+      "label": "Brief concurrentiel sur demande",
+      "description": "Analyse approfondie d'un acteur ciblé, livrée en 5 à 10 jours ouvrables.",
+      "price_min": 6000,
+      "price_max": 12000,
+      "requires_approval": false
+    },
+    {
+      "id": "tableau-trimestriel",
+      "label": "Tableau de bord trimestriel",
+      "description": "Revue stratégique présentée en visioconférence avec recommandations chiffrées.",
+      "price_min": 15000,
+      "price_max": 28000,
+      "requires_approval": false
+    },
+    {
+      "id": "veille-personnalisee",
+      "label": "Veille personnalisée",
+      "description": "Toute prestation hors catalogue. Nécessite une revue manuelle.",
+      "price_min": 0,
+      "price_max": 999999,
+      "requires_approval": true
+    }
+  ],
+  "discount_rules": {
+    "max_discount_pct_auto": 5,
+    "max_discount_pct_with_approval": 15,
+    "no_discount_offers": ["veille-personnalisee"]
+  }
+}
