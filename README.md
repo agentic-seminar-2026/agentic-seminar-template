@@ -5,18 +5,23 @@ Bienvenue dans votre depot pour le seminaire **Gouverner l'entreprise agentique*
 Ce depot contient un **systeme agentique fonctionnel** que vous pouvez executer
 immediatement, ainsi que des gabarits pour les exercices du seminaire.
 
-## Demarrage rapide
+## Demarrage rapide (Codespace -- zero installation)
+
+1. Depuis votre depot GitHub, cliquez **Code > Codespaces > New codespace**
+2. Attendez ~60 secondes -- VS Code s'ouvre dans le navigateur avec Node pre-installe
+3. Le terminal est pret. Explorez les fichiers, editez vos exercices, utilisez Copilot
+
+Les demos en direct sont lancees par le presentateur. Vous explorez le code et
+remplissez vos exercices dans le Codespace.
+
+### Pour les utilisateurs avances (optionnel)
 
 ```bash
 npm install
 cp .env.example .env
 # Remplissez OPENAI_API_KEY et GMAIL_FROM dans .env
-
-# Lancez le cas heureux (le courriel est envoye)
-npm run demo:good_fit
-
-# Lancez le cas risque (la gate bloque)
-npm run demo:risky
+npm run validate -- executive-education   # valide un company pack
+npm run test:policy                       # teste la gate de politique
 ```
 
 ## Ce que contient ce depot

@@ -1,0 +1,21 @@
+{
+  "name": "Agentic Enterprise Seminar",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.wordWrap": "on",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  },
+  "forwardPorts": [],
+  "remoteUser": "node"
+}
